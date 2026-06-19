@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'coffee_theme.dart';
-import 'home_screen.dart';
-import 'shop_screen.dart';
-import 'loyalty_screen.dart';
-import 'about_screen.dart';
+import 'package:fingerlakes_customer/screens/home_screen.dart';
+import 'package:fingerlakes_customer/screens/shop_screen.dart';
+import 'package:fingerlakes_customer/screens/loyalty_screen.dart';
+import 'package:fingerlakes_customer/screens/about_screen.dart';
 
 class MainShell extends StatefulWidget {
   const MainShell({super.key});
@@ -15,7 +15,7 @@ class MainShell extends StatefulWidget {
 
 class _MainShellState extends State<MainShell> {
   int currentIndex = 0;
-  String weeklyMessage = "Test Message";
+  String weeklyMessage = "The new flavor of the month is...BLUEBERRY COBBLER!\nStop into your local shop and grab a cup today!";
 
   final screens = <Widget>[
     HomeScreen(),
