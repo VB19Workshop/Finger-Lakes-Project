@@ -33,8 +33,11 @@ class _MainShellState extends State<MainShell> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: CoffeeTheme.backgroundColor,
+
 
       appBar: AppBar( 
+        backgroundColor: CoffeeTheme.backgroundColor,
         toolbarHeight: 160,
         title: Center(
           child: ConstrainedBox(
@@ -56,7 +59,7 @@ class _MainShellState extends State<MainShell> {
                 margin: const EdgeInsets.all(12),
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 decoration: BoxDecoration(
-                  color: CoffeeTheme.navboxColor,
+                  color: CoffeeTheme.boxColor,
                   borderRadius: BorderRadius.circular(16),
                 ),
                     child: Row(
@@ -66,21 +69,21 @@ class _MainShellState extends State<MainShell> {
                           onPressed: () {
                             switchTab(0);
                           },
-                          child: Text('Home', style: CoffeeTheme.standardTextStyle),
+                          child: Text('Home', style: currentIndex == 0 ? CoffeeTheme.inactiveTextStyle : CoffeeTheme.activeTextStyle),
                         ),
                         
                         TextButton(
                           onPressed: () {
                             switchTab(1);
                           },
-                          child: Text('Shop', style: CoffeeTheme.standardTextStyle),
+                          child: Text('Shop', style: currentIndex == 0 ? CoffeeTheme.inactiveTextStyle : CoffeeTheme.activeTextStyle),
                         ),
                       
                       TextButton(
                           onPressed: () {
                             switchTab(2);
                           },
-                          child: Text('Loyalty', style: CoffeeTheme.standardTextStyle),
+                          child: Text('Loyalty', style: currentIndex == 0 ? CoffeeTheme.inactiveTextStyle : CoffeeTheme.activeTextStyle),
                         )
                       ]
                     ),

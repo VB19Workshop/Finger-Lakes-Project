@@ -1,9 +1,10 @@
+import 'package:fingerlakes_customer/coffee_theme.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/weekly_message_widget.dart';
 import '../widgets/quick_actions_widget.dart';
 import 'package:fingerlakes_customer/event_data.dart';
-import 'package:fingerlakes_customer/widgets/event_tile.dart';
+import 'package:fingerlakes_customer/widgets/event_hero.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,68 +14,103 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool showNewEvents = true;
+  late final PageController _pageController;
+
+  final List<Event> events = [
+    Event(
+      date: "Monday 6/22",
+      title: "Cold Brew Special",
+      description: "Half price cold brew all day",
+    ),
+    Event(
+      date: "Tuesday 6/23",
+      title: "Latte Day",
+      description: "Discounted flavored lattes",
+    ),
+    Event(
+      date: "Wednesday 6/24",
+      title: "Bean Spotlight",
+      description: "Featured roast of the week",
+    ),
+    Event(
+      date: "Thursday 6/25",
+      title: "Bean Spotlight",
+      description: "Featured roast of the week",
+    ),
+    Event(
+      date: "Friday 6/26",
+      title: "Bean Spotlight",
+      description: "Featured roast of the week",
+    ),
+    Event(
+      date: "Saturday 6/27",
+      title: "Bean Spotlight",
+      description: "Featured roast of the week",
+    ),
+    Event(
+      date: "Sunday 6/28",
+      title: "Bean Spotlight",
+      description: "Featured roast of the week",
+    ),
+  ];
+
+  int eventIndex = 0;
+  Event get currentEvent => events[eventIndex];
+
+  @override
+  void initState() {
+    super.initState();
+
+    final todayIndex = DateTime.now().weekday - 1;
+
+    _pageController = PageController(
+      initialPage: todayIndex,
+    );
+
+    eventIndex = todayIndex;
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:
-        Column(
-          children: [
-            weeklyMessage(),
-            quickActions(),
-            const SizedBox(height: 10),
-            eventToggle(),
-            eventList(),
-          ],
-        ),
-    );
-  }
+      backgroundColor: CoffeeTheme.backgroundColor,
+      body: Column(
+        children: [
+          weeklyMessage(),
+          quickActions(),
+          const SizedBox(height: 10),
 
-  Widget eventList() {
-    final events = showNewEvents ? newEvents : standardEvents;
-    
-    return Expanded(
-      child: ListView.builder(
-        itemCount: events.length,
-        itemBuilder: (context, index) {
-          return Center(
-            child: EventTile(events[index]),
-          );
-        },
+          // THIS is your swipeable hero area
+          Expanded(
+            child: PageView.builder(
+              controller: _pageController,
+              itemCount: events.length,
+              onPageChanged: (index) {
+                setState(() {
+                  eventIndex = index;
+                });
+              },
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 5),
+          child: EventHero(events[index]),
+        );
+      }
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  Widget eventToggle() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        TextButton(
-          onPressed: () => setState(() => showNewEvents = true),
-          child: Text(
-            "New",
-            style: TextStyle(
-              color: showNewEvents ? Colors.yellow : Colors.grey,
-            ),
-          ),
-        ),
-        TextButton(
-          onPressed: () => setState(() => showNewEvents = false),
-          child: Text(
-            "Standard",
-            style: TextStyle(
-              color: !showNewEvents ? Colors.yellow : Colors.grey,
-            ),
-          ),
-        ),
-      ],
-    );
+  int getTodayIndex() {
+    return DateTime.now().weekday - 1;
   }
 
-  void toggleEvents(bool value) {
-    setState(() {
-      showNewEvents = value;
-    });
-  }
 }

@@ -9,3 +9,14 @@ final List<Map<String, String>> standardEvents = [
 ];
 
 
+class Event{
+  final String date;
+  final String title;
+  final String description;
+
+  const Event({
+    required this.date,
+    required this.title,
+    required this.description,
+  });
+}
