@@ -4,12 +4,19 @@ class CoffeeTheme {
   static const Color backgroundColor = Color(0xFF697aae);
   static const Color boxColor = Color(0xFF4E4038);
   static const Color boxBorderColor = Color.fromARGB(255, 46, 37, 32);
-  static const Color specialBoxColor = Color(0xFFb2393b);
+  static const Color specialBoxColor = Color.fromARGB(255, 209, 77, 79);
 
   static const TextStyle titleTextStyle = TextStyle(
     fontSize: 28,
     fontWeight: FontWeight.bold,
     color: Color(0xFFFFDD32),
+  );
+
+  static const TextStyle subtitleTextStyle = TextStyle(
+    fontSize: 15,
+    fontFamily: 'Montserrat',
+    fontWeight: FontWeight.bold,
+    color: Color(0xFFFBFAF5),
   );
 
   static const TextStyle headerTextStyle = TextStyle(
@@ -37,6 +44,13 @@ class CoffeeTheme {
     fontSize: 14,
     fontFamily: 'Montserrat',
     fontWeight: FontWeight.normal,
+    color: specialBoxColor,
+  );
+
+  static const TextStyle linkTextStyle = TextStyle(
+    fontSize: 20,
+    fontFamily: 'Montserrat',
+    fontWeight: FontWeight.bold,
     color: specialBoxColor,
   );
 

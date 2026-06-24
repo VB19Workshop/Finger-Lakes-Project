@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'coffee_theme.dart';
 import 'package:fingerlakes_customer/screens/home_screen.dart';
 import 'package:fingerlakes_customer/screens/shop_screen.dart';
 import 'package:fingerlakes_customer/screens/loyalty_screen.dart';
 import 'package:fingerlakes_customer/screens/about_screen.dart';
+import 'package:fingerlakes_customer/screens/find_store.dart';
+import 'package:fingerlakes_customer/screens/contact_screen.dart';
 
 class MainShell extends StatefulWidget {
   const MainShell({super.key});
@@ -17,21 +20,24 @@ class _MainShellState extends State<MainShell> {
   int currentIndex = 0;
   String weeklyMessage = "The new flavor of the month is...BLUEBERRY COBBLER!\nStop into your local shop and grab a cup today!";
 
-  final screens = <Widget>[
-    HomeScreen(),
-    ShopScreen(),
-    LoyaltyScreen(),
-    AboutScreen(),
-  ];
-
   void switchTab(int index) {
     setState(() {
+      HapticFeedback.lightImpact();
       currentIndex = index;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final screens = <Widget>[
+      HomeScreen(onNavigate: switchTab),
+      ShopScreen(),
+      LoyaltyScreen(),
+      AboutScreen(),
+      FindStore(),
+      ContactScreen(),
+    ];
+
     return Scaffold(
       backgroundColor: CoffeeTheme.backgroundColor,
 

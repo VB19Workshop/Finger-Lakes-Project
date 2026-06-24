@@ -21,7 +21,7 @@ class EventHero extends StatelessWidget {
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.25),
+              color: Colors.black.withValues(alpha: 0.25),
               blurRadius: 12,
               offset: const Offset(0, 4),
             ),
@@ -51,12 +51,12 @@ class EventHero extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    event.date!,
+                    event.date,
                     style: CoffeeTheme.headerTextStyle,
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    event.description!,
+                    event.description,
                     style: CoffeeTheme.standardTextStyle,
                   ),
                 ],

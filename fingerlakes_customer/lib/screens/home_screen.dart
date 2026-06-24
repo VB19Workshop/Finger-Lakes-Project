@@ -2,12 +2,13 @@ import 'package:fingerlakes_customer/coffee_theme.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/weekly_message_widget.dart';
-import '../widgets/quick_actions_widget.dart';
 import 'package:fingerlakes_customer/event_data.dart';
 import 'package:fingerlakes_customer/widgets/event_hero.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final Function(int) onNavigate;
+
+  const HomeScreen({required this.onNavigate, super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -111,6 +112,37 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int getTodayIndex() {
     return DateTime.now().weekday - 1;
+  }
+
+  Widget quickActions() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: CoffeeTheme.specialBoxColor,
+          ),
+
+          onPressed: () {
+            // navigate to Find Store
+            widget.onNavigate(4);
+          },
+          child: const Text("Find Store", style: CoffeeTheme.standardTextStyle),
+        ),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: CoffeeTheme.specialBoxColor,
+          ),
+
+          onPressed: () {
+            // navigate to Contact
+            widget.onNavigate(5);
+          },
+          child: const Text("Contact", style: CoffeeTheme.standardTextStyle),
+        ),
+      ],
+    );
   }
 
 }
